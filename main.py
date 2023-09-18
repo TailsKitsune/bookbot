@@ -1,7 +1,10 @@
-with open("books/frankenstein.txt") as f:
+file = "books/frankenstein.txt"
+with open(file) as f:
     file_contents = f.read()
     words = file_contents.split()
-    print(len(words))
+
+    print(f"--- Begin report of {file} ---")
+    print(f"{len(words)} words found in the document")
 
     letter_count = {}
     for letter in file_contents:
@@ -11,4 +14,14 @@ with open("books/frankenstein.txt") as f:
         else:
             letter_count[lower_letter] = 1
 
-    print(letter_count)
+    letters = []
+    for letter in letter_count:
+        if letter.isalpha():
+            letters.append((letter_count[letter], letter))
+
+    letters.sort(reverse=True)
+
+    for letter in letters:
+        print(f"The '{letter[1]}' character was found {letter[0]} times")
+
+    print("--- End report ---")
